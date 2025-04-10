@@ -7,11 +7,23 @@ body {
     line-height: 1.6;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Make container full viewport height */
+    overflow-y: auto; /* Enable vertical scrolling for slides */
+    scroll-snap-type: y mandatory; /* Enable scroll snapping */
+}
+
 header {
     background-color: #333;
     color: white;
     padding: 1em 0;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    scroll-snap-align: start; /* Snap header to the top */
 }
 
 main {
@@ -20,6 +32,26 @@ main {
     margin: 0 auto;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.slide {
+    padding: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    scroll-snap-align: start; /* Snap sections to the start of the viewport */
+    min-height: calc(100vh - 100px); /* Adjust for header and footer */
+    display: flex;
+    flex-direction: column;
+}
+
+#introduction.slide {
+    padding-top: 60px; /* Adjust top padding for header */
+}
+
+#references.slide {
+    margin-bottom: 60px; /* Adjust bottom margin for footer */
 }
 
 section {
@@ -82,14 +114,13 @@ footer {
     padding: 1em 0;
     background-color: #333;
     color: white;
-    position: sticky;
-    bottom: 0;
     width: 100%;
+    scroll-snap-align: end; /* Snap footer to the end */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    main {
+    main,.slide {
         padding: 15px;
     }
     table {
